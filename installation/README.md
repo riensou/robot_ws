@@ -41,9 +41,9 @@ sudo apt -y install git wget
 2. Install ROS Humble
 ```
 sudo sh -c 'echo "deb http://packages.ros.org/ros2/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros2-latest.list' && \
-  sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key F42ED6FBAB17C654 && \
+  sudo gpg --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key F42ED6FBAB17C654&& \
   sudo apt update && \
-  sudo apt install -y ros-humble-desktop && \
+  sudo apt install -y ros-humble-desktop-full && \
   source /opt/ros/humble/setup.bash && \
   echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc && \
   source ~/.bashrc
@@ -67,7 +67,7 @@ sudo apt-get -y install build-essential cmake pkg-config && \
 ```
 Ignition Math  
 ```
-sudo apt-get -y install build-essential cmake git python && \
+sudo apt-get -y install build-essential cmake git python3 && \
 	git clone https://github.com/ignitionrobotics/ign-math /tmp/ign-math && \
 	cd /tmp/ign-math && \
 	git checkout ign-math6 && \
@@ -106,7 +106,7 @@ SDFormat
 sudo apt-get -y install build-essential \
                      cmake \
                      git \
-                     python \
+                     python3 \
                      libboost-system-dev \
                      libtinyxml-dev \
                      libxml2-utils \
@@ -135,6 +135,7 @@ sudo apt-get -y install build-essential \
 	mkdir build && \
 	cd build && \
 	cmake ../ && \
+  sudo apt install cppcheck && \
 	make -j4 && \
 	sudo make install
 ```
@@ -160,13 +161,14 @@ Ignition Transport
 sudo sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list' && \
     wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add - && \
     sudo apt-get -y update && \
-    sudo apt-get -y install libignition-transport8-dev
+    sudo apt-get -y install libignition-transport11-dev
 ```
 7. Initialize the work space
 ```
 mkdir ~/ros2_ws
 mkdir ~/ros2_ws/src
 cd ~/ros2_ws
+sudo apt install python3-colcon-common-extensions
 colcon build
 echo "source ~/ros2_ws/install/local_setup.bash" >> ~/.bashrc
 source ~/.bashrc
@@ -178,9 +180,9 @@ git clone https://github.com/riensou/robot_ws.git
 ```
 9. Gazebo installation
 ```
-git clone https://github.com/gazebosim/gz-sim /tmp/gz-sim && \
-cp -r ~/ros2_ws/src/robot_ws/plugins/gazebo_plugins/* /tmp/gz-sim/plugins && \
-cd /tmp/gz-sim && \
+git clone https://github.com/osrf/gazebo /tmp/gazebo && \
+cp -r ~/ros2_ws/src/robot_ws/plugins/gazebo_plugins/* /tmp/gazebo/plugins && \
+cd /tmp/gazebo && \
 source /opt/ros/humble/setup.bash && \
 mkdir build && \
 cd build && \
@@ -190,7 +192,7 @@ sudo make install
 ```
 10. Copy flipper control plugins
 ```
-cd ~/ros2_ws/src/robot_ws/plugins/flipper_control
+cd  ~/ros2_ws/src/robot_ws/plugins/flipper_control
 mkdir build
 cd build && \
 cmake .. && \
