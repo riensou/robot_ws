@@ -1,7 +1,7 @@
 # Installation
 
 This folder contains description for manual installation, description of python dependencies and automatic installation script.
-We suppose that installation is done on a clean Ubuntu 20.04, if it is not the case, then follow the step-by-step installation guide and modify commands accordnigly to your situation.  
+We suppose that installation is done on a clean Ubuntu 20.04, if it is not the case, then follow the step-by-step installation guide and modify commands accordingly to your situation.  
 Consider to allocate around 30 GB  or more for this software.  
 We also need to notify that installation could take several hours due to source installation of Gazebo.  
 
